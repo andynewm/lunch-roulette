@@ -59,11 +59,10 @@
       return n * 70 + Math.floor((n + 5) / 6) * 5 + Math.floor(n / 6) * 5;
     }
 
-    $('polyline').css(
-      '-webkit-transform',
-      'translate(' + trans(num) + 'px,0px)'
-    );
-  };
+    $('polyline')
+      .css('-webkit-transform', 'translate(' + trans(num) + 'px,0px)')
+      .css('transform', 'translate(' + trans(num) + 'px,0px)')
+  }
 
   var toTheCircle = function (options) {
     var n, size, gapAngle;
@@ -78,25 +77,29 @@
       size = 420 / (1 + 1 / Math.sin((Math.PI * gapAngle) / 360));
     }
 
+    function circleTransform(index) {
+      return (
+        'rotate(' +
+        (n - 1 - index) * gapAngle +
+        'deg) translate(0,-' +
+        (210 - size / 2) +
+        'px)'
+      )
+    }
+
     options
       .css('height', size)
       .css('width', size)
       .css('top', 210 - size / 2)
       .css('left', 210 - size / 2)
-      .css('-webkit-transform', function (index) {
-        return (
-          'rotate(' +
-          (n - 1 - index) * gapAngle +
-          'deg) translate(0,-' +
-          (210 - size / 2) +
-          'px)'
-        );
-      });
-  };
+      .css('-webkit-transform', circleTransform)
+      .css('transform', circleTransform)
+  }
 
   var dispense = function (option) {
     option
       .css('-webkit-transform', 'rotate(2000deg) translate(400px, 1500px)')
+      .css('transform', 'rotate(2000deg) translate(400px, 1500px)')
       .one('transitionend', function () {
         option.hide();
       });
@@ -119,6 +122,7 @@
 
     container
       .css('-webkit-transform', 'rotate(3600deg)')
+      .css('transform', 'rotate(3600deg)')
       .on('transitionend', function (e) {
         if (e.target == this) {
           $('#winnerMessage').show().children().text(luckyWinnerName);
@@ -135,9 +139,11 @@
 
       toTheCircle($('.option.selected'));
 
-      $(document).on('mousewheel', function () {
-        spin($('.options'), $('.option.selected'));
-      });
-    });
-  });
-})();
+      function choose() {
+        spin($('.options'), $('.option.selected'))
+      }
+
+      $(document).on('wheel', choose)
+    })
+  })
+})()
