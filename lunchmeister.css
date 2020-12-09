@@ -1,3 +1,14 @@
+:root {
+  --icon-size: 70px;
+}
+
+svg {
+  width: 420px;
+  height: 420px;
+  width: calc(6 * var(--icon-size));
+  height: calc(6 * var(--icon-size));
+}
+
 @-webkit-keyframes blink {
   from {
     opacity: 0;
@@ -32,6 +43,8 @@
 .options {
   width: 420px;
   height: 420px;
+  width: calc(6 * var(--icon-size));
+  height: calc(6 * var(--icon-size));
   position: relative;
   margin: auto;
   -webkit-transition: -webkit-transform cubic-bezier(0, 0, 0.3, 1) 10s;
@@ -41,6 +54,8 @@
   position: absolute;
   width: 100px;
   height: 100px;
+  width: calc(10 * var(--icon-size) / 7);
+  height: calc(10 * var(--icon-size) / 7);
   top: 0;
   left: 0;
   -webkit-transition: -webkit-transform 0.8s, top 0.3s, left 0.3s;
