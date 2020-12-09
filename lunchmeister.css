@@ -7,20 +7,45 @@
   }
 }
 
+@keyframes blink {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 @-webkit-keyframes blob {
   from {
     -webkit-clip-path: circle(48% at 50% 50%);
     -webkit-clip-path: circle(50%, 50%, 48%);
+    clip-path: circle(50%, 50%, 48%);
   }
   to {
     -webkit-clip-path: circle(50% at 50% 50%);
     -webkit-clip-path: circle(50%, 50%, 50%);
+    clip-path: circle(50%, 50%, 50%);
+  }
+}
+
+@keyframes blob {
+  from {
+    -webkit-clip-path: circle(48% at 50% 50%);
+    -webkit-clip-path: circle(50%, 50%, 48%);
+    clip-path: circle(50%, 50%, 48%);
+  }
+  to {
+    -webkit-clip-path: circle(50% at 50% 50%);
+    -webkit-clip-path: circle(50%, 50%, 50%);
+    clip-path: circle(50%, 50%, 50%);
   }
 }
 
 .option.winner {
   -webkit-clip-path: circle(50%, 50%, 48%);
   -webkit-clip-path: circle(48% at 50% 50%);
+  clip-path: circle(48% at 50% 50%);
   display: inline-block;
   background: #a33;
   -webkit-animation-name: blob;
@@ -47,6 +72,7 @@
   background: black;
   -webkit-clip-path: circle(50%, 50%, 45%);
   -webkit-clip-path: circle(45% at 50% 50%);
+  clip-path: circle(45% at 50% 50%);
 }
 
 svg {
@@ -57,12 +83,14 @@ svg {
   background: silver;
   -webkit-clip-path: circle(50%, 50%, 47%);
   -webkit-clip-path: circle(47% at 50% 50%);
+  clip-path: circle(47% at 50% 50%);
 }
 
 .option.selected {
   background: gray;
   -webkit-clip-path: circle(50%, 50%, 47%);
   -webkit-clip-path: circle(47% at 50% 50%);
+  clip-path: circle(47% at 50% 50%);
 }
 
 .option > div {
@@ -72,6 +100,7 @@ svg {
   height: 100%;
   -webkit-clip-path: circle(50%, 50%, 43%);
   -webkit-clip-path: circle(43% at 50% 50%);
+  clip-path: circle(43% at 50% 50%);
 }
 
 button {
