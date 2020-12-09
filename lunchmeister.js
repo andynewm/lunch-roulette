@@ -1,3 +1,9 @@
+const circleWidth = 140;
+
+(function () {
+  document.querySelector('html').style.setProperty('--icon-size', circleWidth + 'px');
+})();
+
 (function ($) {
   $.fn.shuffle = function () {
     var allElems = this.get(),
@@ -22,13 +28,13 @@
 (function () {
   var initialSetup = function (options) {
     options
-      .css('width', 70)
-      .css('height', 70)
+      .css('width', circleWidth)
+      .css('height', circleWidth)
       .css('top', function (index) {
-        return 70 * Math.floor(index / 6);
+        return circleWidth * Math.floor(index / 6);
       })
       .css('left', function (index) {
-        return 70 * (index % 6);
+        return circleWidth * (index % 6);
       })
       .on('click', function () {
         $(this).toggleClass('selected');
@@ -40,23 +46,23 @@
     var num = options
       .filter('.selected')
       .css('top', function (index) {
-        return 70 * Math.floor(index / 6);
+        return circleWidth * Math.floor(index / 6);
       })
       .css('left', function (index) {
-        return 70 * (index % 6);
+        return circleWidth * (index % 6);
       }).length;
 
     options
       .not('.selected')
       .css('top', function (index) {
-        return 70 * Math.floor((index + num) / 6);
+        return circleWidth * Math.floor((index + num) / 6);
       })
       .css('left', function (index) {
-        return 70 * ((index + num) % 6);
+        return circleWidth * ((index + num) % 6);
       });
 
     function trans(n) {
-      return n * 70 + Math.floor((n + 5) / 6) * 5 + Math.floor(n / 6) * 5;
+      return n * 70 + (Math.floor((n + 5) / 6) + Math.floor(n / 6)) * 5;
     }
 
     $('polyline').css(
@@ -66,31 +72,28 @@
   };
 
   var toTheCircle = function (options) {
+    const defaultSize = 6 * circleWidth
     var n, size, gapAngle;
 
     n = options.length;
 
     if (n === 1) {
       gapAngle = 0;
-      size = 420;
+      size = defaultSize;
     } else {
       gapAngle = 360 / n;
-      size = 420 / (1 + 1 / Math.sin((Math.PI * gapAngle) / 360));
+      size = defaultSize / (1 + 1 / Math.sin(Math.PI / n));
     }
+
+    const translation = (defaultSize - size) / 2
 
     options
       .css('height', size)
       .css('width', size)
-      .css('top', 210 - size / 2)
-      .css('left', 210 - size / 2)
+      .css('top', translation)
+      .css('left', translation)
       .css('-webkit-transform', function (index) {
-        return (
-          'rotate(' +
-          (n - 1 - index) * gapAngle +
-          'deg) translate(0,-' +
-          (210 - size / 2) +
-          'px)'
-        );
+        return 'rotate(' + ((n - 1 - index) * gapAngle) + 'deg) translate(0,-' + translation + 'px)';
       });
   };
 
