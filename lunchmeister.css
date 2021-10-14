@@ -136,6 +136,8 @@ button {
   border: #bbb solid 2px;
   background: #ddd;
   font-family: helvetica;
+  font-size: 3rem;
+  cursor: pointer;
 }
 
 button:hover {
